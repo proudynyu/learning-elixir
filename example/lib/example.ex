@@ -27,12 +27,16 @@ defmodule Example do
 end
 
 defmodule Factorial do
-  def do_it(n) when n <= 0 do
-    1
+  def do_it(n) do
+    internal_do_it(n, 1)
   end
 
-  def do_it(n) do
-    n * do_it(n - 1)
+  defp internal_do_it(0, acc) do
+    acc
+  end
+
+  defp internal_do_it(n, acc) do
+    internal_do_it(n - 1, acc * n)
   end
 end
 
