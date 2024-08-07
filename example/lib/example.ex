@@ -27,7 +27,7 @@ defmodule Example do
 end
 
 defmodule Factorial do
-  def do_it() do
+  def do_it(n) when n <= 0 do
     1
   end
 
@@ -36,4 +36,28 @@ defmodule Factorial do
   end
 end
 
-Example.main()
+defmodule GuessGame do
+  def main() do
+    correct = :rand.uniform(11) - 1
+    guess = IO.gets("Guess the number from 0 to 10: ")
+      |> String.trim()
+      |> Integer.parse()
+
+
+    case guess do
+      {result, _} -> 
+        IO.puts("parse success #{result}")
+
+        if guess === correct do
+          IO.puts("You guessed right!")
+        else
+          IO.puts("You missed, the correct one was #{correct}")
+        end
+
+      :error -> IO.puts("something went wrong")
+    end
+    
+  end
+end
+
+# Example.main()
