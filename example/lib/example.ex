@@ -60,8 +60,56 @@ defmodule GuessGame do
 
       :error -> IO.puts("something went wrong")
     end
-    
+  end
+end
+
+defmodule Grades do
+  def even(n) do
+    if rem(n, 2) == 0 do
+      IO.puts(n)
+    end
+  end
+
+  def sum_and_average(numbers) do
+    sum = Enum.sum(numbers)
+    average = sum / Enum.count(numbers)
+    {sum, average}
+  end
+
+  def print_numbers(numbers) do
+    numbers |> Enum.join(" ") |> IO.puts()
+  end
+
+  def get_number_from_user do
+    IO.puts("Enter the numbers: ")
+    user_input = IO.gets("") |> String.trim()
+    String.split(user_input, " ") |> Enum.map(&String.to_integer/1)
+  end
+
+  def main() do
+    grades = [25, 50, 75, 100]
+
+    new = for n <- grades, do: n + 5
+    IO.inspect(new)
+
+    final = [5 | new]
+
+    even = for n <- final, rem(n, 2) == 0, do: n
+    odd = for n <- final, rem(n, 2) == 1, do: n
+    IO.inspect(even)
+    IO.inspect(odd)
+
+    Enum.each(final, fn num -> even(num) end)
+    nums = ["1", "2", "3"]
+
+    result = Enum.map(nums, &String.to_integer/1)
+    IO.inspect(result)
+
+    user_numbers = get_number_from_user()
+    {sum, average} = sum_and_average(user_numbers)
+    IO.puts("the sum is #{sum} and the average is #{average}")
   end
 end
 
 # Example.main()
+Grades.main()
